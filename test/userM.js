@@ -1,0 +1,9 @@
+$(document).ready(function(){
+	$(".userinfo").click(function(){
+		$('#openDiv').children('a').text($(this).text())
+		$('#openDiv').css("display","block");
+	})
+	$("#close").click(function(){
+		$('#openDiv').css("display","none");
+	})
+})

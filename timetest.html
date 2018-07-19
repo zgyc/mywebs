@@ -1,0 +1,24 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+	</head>
+
+<body onload="mydate()">
+	<script type="text/javascript">
+		function mydate(){
+			var d = new Date();                              
+                var y = d.getFullYear();                         
+               var m = d.getMonth();                            
+               var dd = d.getDate();                            
+               var deftime1=y+"-"+m+"-"+dd                      
+               var deftime2=y+"-"+(m+1)+"-"+dd                  
+               $("#time2").attr("value","2018-05-05")
+		}
+	</script>
+	<input type="date" name="datetest">
+
+
+
+</body>
+</html>

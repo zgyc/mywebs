@@ -1,0 +1,63 @@
+div {
+	border:0.5px solid #73AD21;
+	padding:1px;
+}
+#logpng{
+	height:36px;
+	margin-top:0.8%;
+}
+#logginBody{
+	min-width: 1024px;
+	height: auto;
+}
+#content1{
+	min-width:60%;
+	min-height: 719px;
+	background-image: url("../static/logginImg/login-bg-1.jpg");
+	background-repeat: no-repeat;
+	background-size:100% 100%;
+}
+#logid{
+	width:60%;
+	min-width: 1024px;
+	height:50px;
+	margin:auto;
+}
+
+#logform{
+	width: 60%;
+	min-width: 1024px;
+	height:auto;
+	margin:auto;
+}
+#logform1{
+	background: #F0FFFF;
+	width: 340px;
+	height: 460px;
+	margin-left: 66%;
+	margin-top: 11%;
+	opacity:0.6;
+}
+#logform2{
+	width: 80%;
+	height: 85%;
+	margin-left: 9.5%;
+	margin-top: 10%;
+}
+#j_username{
+	width: 98%;
+	height: 25px;
+}
+#j_password{
+	width: 98%;
+	height: 25px;
+}
+.form-group{
+	margin-top: 30px; 
+}
+
+.form-group button{
+	background: #1E90FF;
+	width: 100%;
+	height: 35px;
+}

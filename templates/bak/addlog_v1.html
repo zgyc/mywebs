@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+
+var jq=$.noConflict();
+jq(document).ready(function(){
+var l1num = 1
+var logitemid=""
+	//初始化左侧列表
+		jq.ajax({
+			url:"addlog",
+			type:"get",
+			success:function(itemnum_name){
+				if (l1num==1){
+					for (var i=0;i<itemnum_name.length;i++){
+						jq("#itemNameList").append("<li class='itemnum_nam' id='"+itemnum_name[i].item_num+"'><a>"+itemnum_name[i].item_num+':'+itemnum_name[i].item_name+"</a></li>");
+					};
+				l1num=0};},
+			});
+	//左侧列表单击获取项目num及name,赋值logItemId
+	jq('#itemNameList').on('click','.itemnum_nam',function(){
+	var numName=jq(this).text()
+	logitemnum=numName.substring(0,4)	
+	jq("#num_name").empty()
+	jq("#num_name").append(numName)	
+	})
+
+	//提交到数据库
+	jq("#btn1").click(function(){
+		logstatus=jq("#logstatus").val()
+		logdata=jq("#testarea1").val()
+		if (jq("#num_name").text()){
+		jq.ajax({
+			url:"addlog",
+			type:"post",
+			data:{
+				"logitemnum":logitemnum,
+				"logstatus":logstatus,
+				"logdata":logdata
+				},
+			success:function(itemdatas){
+				alert(itemdatas.utime)},
+			})
+		}
+		})
+
+
+	});
+
+</script>
+<style>
+ul {
+	list-style-type:none;
+	padding:0;
+	margin:0;
+	background-color:#f1f1f1;
+
+}
+.itemnum_nam a {
+	display:block;
+	color:#000;
+	padding:8px 16px;
+	text-decoration:none;
+}
+.itemnum_nam a:hover{
+	background-color:#555;
+		color:white;
+}
+div {
+	border:3px solid #73AD21;
+	padding:3px;
+}
+</style>
+</head>
+
+<body>
+<div style="border: 3px solid #73AD21;padding: 3px;height:1000px">
+		<div id="blockLeft" style="float:left;border:3px solid #73AD21;width:12%;height:100%;">
+			<ul id="itemNameList" class="nameList">
+			</ul>
+		</div>
+		<div id="blockRigth" style="float:left;border: 3px solid #73AD21;width:85%;height:100%;">
+			<div id="firstLine" class="Row" style="height:50px;">
+				<a style="float:left;">status:</a>
+				<select id="logstatus" class="" style="float:left;">
+					<option>normal</option>
+					<option>abnormal</option>
+					<option>none</option>
+					<option>other</option>
+				</select>
+				<button id="btn1" style="float:left;">submit</button>
+				<div id="num_name" style="float:left;width:90%;height:20px;"></div>
+			</div>
+			<div id="blockContent">
+			<div id="blockTest1">
+				<label for="textarea1">test1</label><br>
+				<textarea rows="8" name="textarea1" id="testarea1" style="resize:none;width:50%;"></textarea><br>
+			</div>
+			<div id="blockTest2">
+				<label for="textarea2">test2</label><br>
+				<textarea  rows="8" name="textarea2" id="testarea2" style="resize:none;width:50%;" ></textarea><br>
+			</div>
+			</div>
+		</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+var jq=$.noConflict();
+jq(document).ready(function(){
+jq("#itemNameList").hide();
+jq("#logaddbtn").click(function(){
+	jq("#itemNameList").toggle();
+});
+
+var l1num = 1
+var logitemid=""
+	//初始化左侧列表
+		jq.ajax({
+			url:"addlog",
+			type:"get",
+			success:function(itemnum_name){
+				if (l1num==1){
+					for (var i=0;i<itemnum_name.length;i++){
+						jq("#itemNameList").append("<li class='itemnum_nam' id='"+itemnum_name[i].item_num+"'><a>"+itemnum_name[i].item_num+':'+itemnum_name[i].item_name+"</a></li>");
+					};
+					}
+				l1num=0},
+			})
+
+	//左侧列表单击获取项目num及name,赋值logItemId
+	jq('#itemNameList').on('click','.itemnum_nam',function(){
+	var numName=jq(this).text()
+	logitemnum=numName.substring(0,4)	
+	jq("#num_name").empty()
+	jq("#num_name").append(numName)	
+	//填充test
+	jq.ajax({
+			url:"wtest1",
+			type:"post",
+			data:logitemnum,
+			success:function(qu_result){
+				if (qu_result)
+				{
+					document.getElementById("testarea1").value=decodeURI(qu_result.log_data);
+					if (qu_result.event_content)
+					{document.getElementById("testarea2").value=decodeURI(qu_result.event_content)}
+					else
+					{document.getElementById("testarea2").value="none"};
+
+					document.getElementById("testarea1").readOnly=true;
+					document.getElementById("testarea2").readOnly=true;
+					document.getElementById("btn1").disabled=true;
+				}
+				else
+				{
+					document.getElementById("testarea1").value="";
+					document.getElementById("testarea2").value="";
+					document.getElementById("testarea1").readOnly=false;
+					document.getElementById("testarea2").readOnly=false;
+					document.getElementById("btn1").disabled=false;
+				}
+			},
+		})
+	})
+
+
+	//提交到数据库
+	jq("#btn1").click(function(){
+		logstatus=jq("#logstatus").val()
+		logdata=jq("#testarea1").val()
+		logdataAppend=jq("#testarea2").val()
+		if (jq("#num_name").text()){
+		jq.ajax({
+			url:"addlog",
+			type:"post",
+			data:{
+				"logitemnum":logitemnum,
+				"logstatus":logstatus,
+				"logdata":encodeURI(logdata),
+				"logdataAppend":encodeURI(logdataAppend)
+				},
+			success:function(){
+				alert("submit success");
+					document.getElementById("testarea1").readOnly=true;
+					document.getElementById("testarea2").readOnly=true;
+					document.getElementById("btn1").disabled=true;
+			},
+		})
+		}
+		else {alert('select item_name')}
+		})
+
+
+	});
+
+</script>
+<style>
+ul {
+	list-style-type:none;
+	padding:0;
+	margin:0;
+	background-color:#f1f1f1;
+
+}
+.itemnum_nam a {
+	display:block;
+	color:#000;
+	padding:8px 16px;
+	text-decoration:none;
+}
+.itemnum_nam a:hover{
+	background-color:#555;
+		color:white;
+}
+div {
+	border:3px solid #73AD21;
+	padding:3px;
+}
+.leftbtn{
+	color:#000;
+	width:100%;
+	height:40px;
+}
+</style>
+</head>
+
+<body>
+<div style="border: 3px solid #73AD21;padding: 3px;height:1000px;">
+		<div id="blockLeft" style="float:left;border:3px solid #73AD21;width:12%;height:99%;">
+			<button id="logaddbtn" class="leftbtn">添加</button>
+			<ul id="itemNameList" class="nameList">
+			</ul>
+			<button id="logquebtn" class="leftbtn">查询</button>
+		</div>
+		<div id="blockRigth" style="float:left;border: 3px solid #73AD21;width:85%;height:99%;">
+			
+		</div>
+</div>
+</body>
+</html>

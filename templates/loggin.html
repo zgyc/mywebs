@@ -1,0 +1,40 @@
+{% extends "Base.html" %}
+{% block contents %}
+<!--content-2 -->
+	<div id="content1">
+		<div id="logform">
+			<div id="logform1">
+				<div id="logform2">
+					<div id="panel-heading">
+						<h2>登录</h2>
+					</div>
+					<form id="login-form" class="loginForm" action="" method="post">
+						<div class="form-group">
+							<label class="control-label" for="j_username">登录名</label>
+							<div class="controls">
+								<input id="j_username" class="form-control" value="" required oninvalid="setCustomValidity('请输入用户名！');" oninput="setCustomValidity('');" type="text" name="login">
+								<div class="help-block">请输入用户名</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label" for="j_password">密码</label>
+							<div class="controls">
+								<input id="j_password" class="form-control" type="password" name="token" required oninvalid="setCustomValidity('请输入密码！');" oninput="setCustomValidity('');">
+								<div class="help-block">请输入密码</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="controls">
+								<button class="btn" type="submit">登录</button>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+{% endblock %}

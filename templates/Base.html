@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<meta charset="utf-8">
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="../static/add_query.js"></script>
+<script src="../static/bgmanage.js"></script>
+<link rel="stylesheet" type="text/css" href="../static/loggin.css">
+<link rel="stylesheet" type="text/css" href="../static/index-base.css">
+<link rel="stylesheet" type="text/css" href="../static/index-query.css">
+<link rel="stylesheet" type="text/css" href="../static/bgmanage.css">
+
+</head>
+<body>
+
+<div id="logginBody" class="logginBdCls">
+	<!--content-first -->
+	<div class="container-gap" style="height: 55px;">
+		<div id="logid">
+			<a class="png" href="loggin">
+			   <img id="logpng" alt="图片文本描述" src="../static/logginImg/sobey.png">
+	     </a>
+		</div>
+	</div>
+	
+	{% block contents %}
+	{% endblock %}
+	<!--content-end -->
+	<div style="height:170px;">
+		
+	</div>
+
+</div>
+
+
+
+</body>
+</html>

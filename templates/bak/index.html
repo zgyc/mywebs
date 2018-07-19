@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+
+
+
+var jq=$.noConflict();
+jq(document).ready(function(){
+var l1num = 1
+var l2name = 1
+//item_num to item_name 
+	jq("#level1itemnum").mousedown(function(){
+		jq.ajax({
+			url:"addlog",
+			type:"post",
+			success:function(itemnum_name){
+//				jq("option").remove(".cls_l1m");
+				if (l1num==1){
+					for (var i=0;i<itemnum_name.length;i++){
+						jq("#level1itemnum").append("<option class='cls_l1m'>"+itemnum_name[i].item_num+"</option>");
+				//		jq("#level1itemnum").append("<option value='"+itemnum_name[i].item_num+"'>");
+					};
+				l1num=0};},
+			});
+	});
+		jq("#level1itemnum").change(function(){
+	
+		var datas = jq("#level1itemnum").val() 
+		jq.ajax({
+			url:"addlog",
+			type:"post",
+			success:function(itemnum_name){
+				jq("option").remove(".cls_l2m");
+				for (var i=0;i<itemnum_name.length;i++){
+					if (itemnum_name[i].item_num==datas){
+						jq("#level2itemname").append("<option class='cls_l2m'>"+itemnum_name[i].item_name+"</option>");
+					};};},
+			});
+		});
+//	})
+//item_num to item_name END!
+
+//item_name to item_num 	
+	jq("#level2itemname").click(function(){
+		jq.ajax({
+			url:"addlog",
+			type:"post",
+			success:function(itemnum_name){
+//				jq("option").remove(".cls_l2m");
+				if (l2name==1){
+					for (var i=0;i<itemnum_name.length;i++){
+						jq("#level2itemname").append("<option class='cls_l2m'>"+itemnum_name[i].item_name+"</option>");
+						};
+				l2name=0};},
+			});
+	});
+		jq("#level2itemname").change(function(){
+	
+		var datas = jq("#level2itemname").val() 
+		jq.ajax({
+			url:"addlog",
+			type:"post",
+			success:function(itemnum_name){
+				jq("option").remove(".cls_l1m");
+				for (var i=0;i<itemnum_name.length;i++){
+					if (itemnum_name[i].item_name==datas){
+						jq("#level1itemnum").append("<option class='cls_l1m'>"+itemnum_name[i].item_num+"</option>");
+					};};},
+			});
+		});
+
+
+
+
+
+
+
+		});
+</script>
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

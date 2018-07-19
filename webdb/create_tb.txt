@@ -1,0 +1,84 @@
+create table IF NOT EXISTS users_tb (
+user_id SMALLINT(4) UNSIGNED NOT NULL AUTO_INCREMENT,
+user_name varchar(50) NOT NULL,
+user_passwd VARCHAR(255) NOT NULL,
+privilege TINYINT NOT NULL,
+user_tel VARCHAR(20) NOT NULL,
+user_wx VARCHAR(100),
+user_email VARCHAR(100),
+create_time datetime DEFAULT NOW(),
+UNIQUE (user_name),
+PRIMARY KEY (user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+create table IF NOT EXISTS items_tb (
+item_id SMALLINT(4) UNSIGNED NOT NULL AUTO_INCREMENT,
+item_num SMALLINT(4) NOT NULL,
+item_area VARCHAR(40) NOT NULL,
+sub_unit VARCHAR(40) NOT NULL,
+item_name VARCHAR(100) NOT NULL,
+create_time datetime DEFAULT NOW(),
+UNIQUE (item_num), 
+PRIMARY KEY (item_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE items_tb ADD UNIQUE (item_name)
+
+
+
+create table IF NOT EXISTS logcontent_tb (
+log_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+log_type VARCHAR(40) NOT NULL,
+log_status VARCHAR(40) NOT NULL,
+log_data LONGTEXT,
+u_time DATE NOT NULL,
+create_time datetime DEFAULT NOW(),
+log_item_id SMALLINT(4) UNSIGNED NOT NULL,
+PRIMARY KEY (log_id),
+FOREIGN KEY (log_item_id) REFERENCES items_tb (item_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+create table IF NOT EXISTS event_tb (
+event_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+event_content LONGTEXT NOT NULL,
+files_path VARCHAR(255),
+create_time datetime DEFAULT NOW(),
+event_log_id INT UNSIGNED NOT NULL,
+event_user_id SMALLINT(4) UNSIGNED NOT NULL,
+PRIMARY KEY (event_id),
+FOREIGN KEY (event_log_id) REFERENCES logcontent_tb (log_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table event_tb add FOREIGN KEY (event_user_id) REFERENCES users_tb(user_id)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
