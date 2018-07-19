@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$(".userinfo").click(function(){
+	$(".colInfo1").click(function(){
 		$('#openDiv').children('a').text($(this).text())
 		$('#openDiv').css("display","block");
 	})

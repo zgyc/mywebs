@@ -2,7 +2,7 @@ div{
 	border: 1px solid #215EAD;
 	padding: 1px;
 }
-#userQ{
+#userQ,.userForm{
 	width: 60%;
 	margin: 0 20%;
 }
@@ -26,10 +26,15 @@ ul{
 	width: 150px;
 } 
 #openDiv{
+	background: #C0C0C0;
 	display: none;
 	position: absolute;
-	width: 35%;
-	height: 40%;
-	margin:10% 32.5% ;
+	width: 30%;
+	height: auto;
+	margin:10% 35% ;
 	z-index: 1;
+}
+.userDes{
+	display: inline-block;
+	width: 60px;
 }
